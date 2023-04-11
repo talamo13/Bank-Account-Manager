@@ -79,7 +79,7 @@ public:
     //Default CD Constructor
     CD();
     //CD Menu
-    int cdMenu(int x);
+    int clientMenu(int x);
     //Buy Certificate of Deposit
     void buyCD(int x);
     //View Your Certificate of Deposit

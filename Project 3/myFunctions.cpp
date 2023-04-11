@@ -360,7 +360,7 @@ CD::CD():bankAccount() {
     intRate = 10.0;
 }
 //CD Account Menu
-int CD::cdMenu(int x) {
+int CD::clientMenu(int x) {
     cout << endl;
     for (int i = 0; i < 30; i++) {
         cout << "-";
@@ -378,7 +378,7 @@ int CD::cdMenu(int x) {
         }
     }
     while (x != 0) {
-        cout << "Select From The Following Options:\n[1] Buy CD\n[2] Withdrawl\n[3] View CDs\n[0] Exit\n";
+        cout << "Select From The Following Options:\n[1] Deposit\n[2] Buy CD\n[3] Withdrawal CD\n[4] Withdrawal Cash\n[5] View CDs\n[0] Exit";
         cin >> x;
         if (x == 1 || x == 2 || x == 3 || x == 4 || x == 5) {
             switch (x) {
