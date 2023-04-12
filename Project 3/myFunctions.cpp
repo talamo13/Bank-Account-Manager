@@ -7,7 +7,6 @@ using namespace std;
 //Default constructor
 bankAccount::bankAccount() {
     accName = "NULL";
-    accType = "NULL";
     accNum = 0;
     balance = 0.0;
     intRate = 0.0;
@@ -144,13 +143,11 @@ string bankAccount::getAccType() {
 
 
 //Checking Account Functions:
-
 //Default Constructor
-CheckingAccount::CheckingAccount() {
+CheckingAccount::CheckingAccount(): bankAccount() {
     checkNum = 1;
     accType = "Checking";
     accNum = ranNum(0);
-    intRate = 1.0;
 }
 //Checking Account Menu
 int CheckingAccount::clientMenu(int x) {
@@ -221,13 +218,36 @@ void CheckingAccount::check(int amount, string name) {
     }
 }
 
+//Service Charge Checking
+//Default Constructor
+ServiceChargeChecking::ServiceChargeChecking(): CheckingAccount() {
+    intRate = 0.0;
+    minBalance = 0;
+    serviceCharge = 20;
+}
 
+//No Service Charge Checking
+//Default Constructor
+NoServiceChargeChecking:: NoServiceChargeChecking(): CheckingAccount() {
+    intRate = 1.0;
+    minBalance = 500;
+    serviceCharge = 0;
+}
+
+// High Interest Checking
+//Default Constructor
+HighInterestChecking::HighInterestChecking(): CheckingAccount() {
+    intRate = 2.5;
+    minBalance = 1000;
+    serviceCharge = 0;
+}
 
 //Savings Account Functions:
-
 //Default Constructor
 SavingsAccount::SavingsAccount() {
-
+    intRate = 2.5;
+    minBalance = 0;
+    serviceCharge = 0;
 }
 //Savings Account Menu 
 int SavingsAccount::clientMenu(int x) {
@@ -275,10 +295,15 @@ int SavingsAccount::clientMenu(int x) {
     }
 }
 
-
+//High Interest Savings Account Functions:
+//Default Constructor
+HighSavingsAccount::HighSavingsAccount() {
+    intRate = 5.0;
+    minBalance = 10000;
+    serviceCharge = 0;
+}
 
 //Manger Account Functions: 
-
 //Default Constructor
 ManagerAccount::ManagerAccount() {
 
@@ -351,13 +376,13 @@ void ManagerAccount::printAccounts() {
 }
 
 //CD Account Functions:
-
 //Default Constructor
 CD::CD():bankAccount() {
     maturityMonths = 0;
     currMonth = 0;
     cdNum = 0;
     intRate = 10.0;
+    minBalance = 0;
 }
 //CD Account Menu
 int CD::clientMenu(int x) {

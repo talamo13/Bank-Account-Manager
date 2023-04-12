@@ -38,7 +38,8 @@ public:
     int totalBalance;
     int withdrawlNum;
     double intRate;
-
+    int minBalance;
+    int serviceCharge;
 };
 
 class CheckingAccount: public bankAccount {
@@ -54,12 +55,33 @@ private:
     int checkNum;
 };
 
+class ServiceChargeChecking : public CheckingAccount {
+public:
+    ServiceChargeChecking();
+};
+
+class NoServiceChargeChecking : public CheckingAccount {
+public:
+    NoServiceChargeChecking();
+};
+
+class HighInterestChecking : public CheckingAccount {
+public:
+    HighInterestChecking();
+};
+
 class SavingsAccount: public bankAccount {
 public:
     //Default Savings Account Constructor
     SavingsAccount();
     //Savings Account Menu
     int clientMenu(int x);
+};
+
+class HighSavingsAccount : public SavingsAccount {
+public:
+    //Default Constructor
+    HighSavingsAccount();
 };
 
 class ManagerAccount: public bankAccount {
