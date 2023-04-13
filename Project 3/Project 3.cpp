@@ -58,7 +58,7 @@ int main()
                         //New Service Charge Checking Account
                         if (x == 1)
                         {
-                            CheckingAccount accountOne;
+                            ServiceChargeChecking accountOne;
                             //account holder name
                             cout << "Enter your full name: ";
                             cin.ignore();
@@ -114,14 +114,114 @@ int main()
                         //New No Service Charge Checking Account
                         else if (x == 2)
                         {
-                            cout << "Placeholder";
-                            x = 0;
+                            NoServiceChargeChecking accountOne;
+                            //account holder name
+                            cout << "Enter your full name: ";
+                            cin.ignore();
+                            getline(cin, accountOne.accName);
+
+                            //Put the Checking Account Menu in here                   
+                            while (x == 1 || x == 2 || x == 3 || x == 4 || x == 5) {
+                                x = accountOne.clientMenu(1);
+                                int amount;
+                                string name;
+                                switch (x) {
+                                case 1:
+                                    //Deposit
+                                    cout << "(We work on the honor system here)\nHow much would you like to deposit into your account?: $";
+                                    cin >> nav;
+                                    accountOne.deposit(nav);
+                                    nav = 0;
+                                    break;
+                                case 2:
+                                    //Withdrawl
+                                    cout << "How much would you like to withdrawl from your account?: $";
+                                    cin >> nav;
+                                    accountOne.withdrawal(nav);
+                                    nav = 0;
+                                    break;
+                                case 3:
+                                    //Print Account Info
+                                    accountOne.print();
+                                    break;
+                                case 4:
+                                    //Write A Check
+                                    cout << "\nName of person the check is being issued to: ";
+                                    cin.ignore();
+                                    getline(cin, name);
+                                    cout << "Amount being issued: $";
+                                    cin >> amount;
+                                    accountOne.check(amount, name);
+                                    break;
+                                case 5:
+                                    //Interest Calculator
+                                    accountOne.interest(0);
+                                    break;
+                                }
+                            }
+                            if (x == 0) {
+                                cout << "\nThank you for banking with us! Have a nice day!\n";
+                                return 0;
+                            }
+                            else {
+                                cout << "Invalid Input!\n";
+                            }
                         }
                         //New High Interest Checking Account
-                        else if (x == 2)
+                        else if (x == 3)
                         {
-                            cout << "Placeholder";
-                            x = 0;
+                            HighInterestChecking accountOne;
+                            //account holder name
+                            cout << "Enter your full name: ";
+                            cin.ignore();
+                            getline(cin, accountOne.accName);
+
+                            //Put the Checking Account Menu in here                   
+                            while (x == 1 || x == 2 || x == 3 || x == 4 || x == 5) {
+                                x = accountOne.clientMenu(1);
+                                int amount;
+                                string name;
+                                switch (x) {
+                                case 1:
+                                    //Deposit
+                                    cout << "(We work on the honor system here)\nHow much would you like to deposit into your account?: $";
+                                    cin >> nav;
+                                    accountOne.deposit(nav);
+                                    nav = 0;
+                                    break;
+                                case 2:
+                                    //Withdrawl
+                                    cout << "How much would you like to withdrawl from your account?: $";
+                                    cin >> nav;
+                                    accountOne.withdrawal(nav);
+                                    nav = 0;
+                                    break;
+                                case 3:
+                                    //Print Account Info
+                                    accountOne.print();
+                                    break;
+                                case 4:
+                                    //Write A Check
+                                    cout << "\nName of person the check is being issued to: ";
+                                    cin.ignore();
+                                    getline(cin, name);
+                                    cout << "Amount being issued: $";
+                                    cin >> amount;
+                                    accountOne.check(amount, name);
+                                    break;
+                                case 5:
+                                    //Interest Calculator
+                                    accountOne.interest(0);
+                                    break;
+                                }
+                            }
+                            if (x == 0) {
+                                cout << "\nThank you for banking with us! Have a nice day!\n";
+                                return 0;
+                            }
+                            else {
+                                cout << "Invalid Input!\n";
+                            }
                         }
                         else 
                         {
@@ -130,7 +230,7 @@ int main()
 
                     }
                 }
-                //New Savings Account
+                //Savings Account
                 else if (x == 2)
                 {
                     while (x != 0) {
@@ -141,15 +241,12 @@ int main()
                         //New Standard Savings Account 
                         if (x == 1) {
                             SavingsAccount accountOne;
-                            accountOne.accType = "Savings";
                             //account number
                             accountOne.accNum = accountOne.ranNum(0);
                             //account holder name
                             cout << "Enter your full name: ";
                             cin.ignore();
                             getline(cin, accountOne.accName);
-                            //interest rate
-                            accountOne.setIntRate("Savings");
                             //Savings Account Menu
                             while (x == 1 || x == 2 || x == 3 || x == 4 || x == 5) {
                                 x = accountOne.clientMenu(1);
@@ -189,8 +286,51 @@ int main()
                             }
                         }
                         //New High Interest Savings Account
-                        else if (x ==2) {
-                            cout << "Placeholder";
+                        else if (x == 2) {
+                            HighSavingsAccount accountOne;
+                            //account number
+                            accountOne.accNum = accountOne.ranNum(0);
+                            //account holder name
+                            cout << "Enter your full name: ";
+                            cin.ignore();
+                            getline(cin, accountOne.accName);
+                            //Savings Account Menu
+                            while (x == 1 || x == 2 || x == 3 || x == 4 || x == 5) {
+                                x = accountOne.clientMenu(1);
+                                int amount;
+                                string name;
+                                switch (x) {
+                                case 1:
+                                    //Deposit
+                                    cout << "(We work on the honor system here)\nHow much would you like to deposit into your account?: $";
+                                    cin >> nav;
+                                    accountOne.deposit(nav);
+                                    nav = 0;
+                                    break;
+                                case 2:
+                                    //Withdrawl
+                                    cout << "How much would you like to withdrawal from your account?: $";
+                                    cin >> nav;
+                                    accountOne.withdrawal(nav);
+                                    nav = 0;
+                                    break;
+                                case 3:
+                                    //Print Account Info
+                                    accountOne.print();
+                                    break;
+                                case 4:
+                                    //Interest Calculator
+                                    accountOne.interest(0);
+                                    break;
+                                }
+                            }
+                            if (x == 0) {
+                                cout << "\nThank you for banking with us! Have a nice day!\n";
+                                return 0;
+                            }
+                            else {
+                                cout << "Invalid Input!\n";
+                            }
                         }
                         else {
                             cout << "Error: Invalid Selection!";
@@ -199,7 +339,7 @@ int main()
                         
                     }
                 }
-                //New CD Account 
+                //CD Account 
                 else if (x == 3)
                 {
                     CD accountOne;
@@ -226,20 +366,42 @@ int main()
                             break;
                         case 2:
                             //Buy CD
-                            
+                            cout << "Would you like to purchase a Certificate of Deposit?\nPrice: $5000\nMaturity: 6 Months\nInterest Rate: 10.0%\n[1] Yes\n[2] No\n";
+                            cin >> x;
+                            accountOne.buyCD(x);
                             nav = 0;
                             break;
                         case 3:
                             //Withdrawal CD
-                            
-                            break;
+                            cout << "WARNING: Early Withdrawal Result In A $500 Penalty!\nWould You Like To Proceed?\n[1] Yes\n[2] No\n";
+                            cin >> x;
+                            if (x == 1) {
+                                cout << "Total owned CDs: " << accountOne.getCDNum() << endl;
+                                cout << "Amount of CDs you would like to withdrawal: ";
+                                cin >> nav;
+                                if (nav != accountOne.getCDNum()) {
+                                    cout << "Error: Invalid Selection!\n";
+                                    break;
+                                }
+                                else {
+                                    accountOne.cdWithdrawal(nav);
+                                    nav = 0;
+                                    break;
+                                }
+                            }
+                            else {
+                                break;
+                            }
                         case 4:
                             //Withdrawal Cash
-
-                            break;
+                            cout << "How much would you like to withdrawal from your account?: $";
+                            cin >> nav;
+                            accountOne.withdrawal(nav);
+                            nav = 0;
+                            break;;
                         case 5: 
-                            //View CDs
-
+                            //Account Info
+                            accountOne.print();
                             break;
                         }
                     }

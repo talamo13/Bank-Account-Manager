@@ -11,7 +11,9 @@ public:
     //Print the account holder name, account number, account type, balance, and interest rate (1 for client info and 2 for the whole banks info)
     void print();
     //Adds money to the account balance
-    void deposit(int x);
+    virtual void deposit() {
+        0;
+    }
     //Subtracts money from the account balance
     void withdrawal(int x);
     //Returns wether the user would like to overdraft their account or not
@@ -50,24 +52,29 @@ public:
     int clientMenu(int x);
     //Issues A Check
     void check(int amount, string name);
+    //Deposits Cash
+    void deposit(int x);
 
-private:
     int checkNum;
 };
 
 class ServiceChargeChecking : public CheckingAccount {
 public:
     ServiceChargeChecking();
+    void deposit(int x);
+    void check(int amount, string name);
 };
 
 class NoServiceChargeChecking : public CheckingAccount {
 public:
     NoServiceChargeChecking();
+    void deposit(int x);
 };
 
 class HighInterestChecking : public CheckingAccount {
 public:
     HighInterestChecking();
+    void deposit(int x);
 };
 
 class SavingsAccount: public bankAccount {
@@ -76,12 +83,16 @@ public:
     SavingsAccount();
     //Savings Account Menu
     int clientMenu(int x);
+    //Deposits Cash
+    void deposit(int x);
 };
 
 class HighSavingsAccount : public SavingsAccount {
 public:
     //Default Constructor
     HighSavingsAccount();
+    //Deposit Cash
+    void deposit(int x);
 };
 
 class ManagerAccount: public bankAccount {
@@ -102,12 +113,14 @@ public:
     CD();
     //CD Menu
     int clientMenu(int x);
+    //Deposit Cash
+    void deposit(int x);
     //Buy Certificate of Deposit
     void buyCD(int x);
-    //View Your Certificate of Deposit
-    void viewCD();
+    //Overridden Print Function
+    void print();
     //Withdrawl Your CD
-    void cdWithdrawl();
+    void cdWithdrawal(int x);
     //Set Functions
     void setMaturityMonths(int x);
     void setCDNum(int x);

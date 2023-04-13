@@ -32,15 +32,10 @@ int bankAccount::ranNum(int x) {
 void bankAccount::print() {
     cout << "\n";
     cout << accName << "'s " << accType << " Account:\n";
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < 45; i++) {
         cout << "*";
     }
     cout << "\nAccount Number: " << accNum << "\nBalance: $" << balance << "\nInterest Rate : " << intRate << "%\n\n";
-}
-//Adds money to the account balance
-void bankAccount::deposit(int x) {
-    balance = balance + x;
-    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
 }
 //Subtracts money from the account balance
 void bankAccount::withdrawal(int x) {
@@ -140,13 +135,12 @@ string bankAccount::getAccType() {
     return accType;
 }
 
-
+      
 
 //Checking Account Functions:
 //Default Constructor
 CheckingAccount::CheckingAccount(): bankAccount() {
     checkNum = 1;
-    accType = "Checking";
     accNum = ranNum(0);
 }
 //Checking Account Menu
@@ -168,7 +162,7 @@ int CheckingAccount::clientMenu(int x) {
         }
     }
     while (x != 0) {
-        cout << "Select From The Following Options:\n[1] Deposit\n[2] Withdrawal\n[3] Account Info\n[4] Write A Check\n[5] Interest Calculator\n[0] Exit\n";
+        cout << "Select From The Following Options:\n[1] Deposit\n[2] Withdrawal\n[3] Account Info\n[4] Write A Check\n[5] Interest \n[0] Exit\n";
         cin >> x;
         if (x == 1 || x == 2 || x == 3 || x == 4 || x == 5) {
             switch (x) {
@@ -217,6 +211,11 @@ void CheckingAccount::check(int amount, string name) {
         balance = balance - amount;
     }
 }
+//Deposit Cash
+void CheckingAccount::deposit(int x) {
+    balance = balance + x;
+    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
+}
 
 //Service Charge Checking
 //Default Constructor
@@ -224,6 +223,35 @@ ServiceChargeChecking::ServiceChargeChecking(): CheckingAccount() {
     intRate = 0.0;
     minBalance = 0;
     serviceCharge = 20;
+    accType = "Service Charge Checking";
+}
+//Deposit Cash
+void ServiceChargeChecking::deposit(int x) {
+    balance = balance + x;
+    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
+}
+//Override Check Function From Checking Account 
+void ServiceChargeChecking::check(int amount, string name) {
+    if (checkNum == 5) {
+        cout << "Error: You have issued your maximum allowed of checks!" << endl;
+        return;
+    }
+    if (balance < amount)
+    {
+        cout << "Error: Unable to issue a check for more than your balance!" << endl;
+    }
+    else {
+        for (int i = 0; i < 30; i++) {
+            cout << "-";
+            if (i == 29)
+            {
+                cout << "\n";
+            }
+        }
+        cout << accName << "\nCheck: " << checkNum << "\nPay To The Order Of: " << name << "\nAmount: $ " << amount << "\nFrom Account: " << accNum;
+        checkNum++;
+        balance = balance - amount;
+    }
 }
 
 //No Service Charge Checking
@@ -232,6 +260,22 @@ NoServiceChargeChecking:: NoServiceChargeChecking(): CheckingAccount() {
     intRate = 1.0;
     minBalance = 500;
     serviceCharge = 0;
+    accType = "No Service Charge Checking";
+}
+//Deposit Cash
+void NoServiceChargeChecking::deposit(int x) {
+    if (balance <= 500) {
+        cout << "Minimum Balance For This Account Must Remain Over $500" << endl;
+        while (x < 500 - balance)
+        {
+            cout << "Required  Minimum Deposit: $" << 500 - balance << endl;
+            cout << "How much would you like to deposit into your account?: $";
+            cin >> x;
+        }
+    }
+    balance = balance + x;
+    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
+    
 }
 
 // High Interest Checking
@@ -240,6 +284,21 @@ HighInterestChecking::HighInterestChecking(): CheckingAccount() {
     intRate = 2.5;
     minBalance = 1000;
     serviceCharge = 0;
+    accType = "High Interest Checking";
+}
+//Deposit Cash
+void HighInterestChecking::deposit(int x) {
+    if (balance <= 1000) {
+        cout << "Minimum Balance For This Account Must Remain Over $1000" << endl;
+        while (x < 1000 - balance)
+        {
+            cout << "Required  Minimum Deposit: $" << 1000 - balance << endl;
+            cout << "How much would you like to deposit into your account?: $";
+            cin >> x;
+        }
+    }
+    balance = balance + x;
+    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
 }
 
 //Savings Account Functions:
@@ -248,6 +307,7 @@ SavingsAccount::SavingsAccount() {
     intRate = 2.5;
     minBalance = 0;
     serviceCharge = 0;
+    accType = "Standard Savings";
 }
 //Savings Account Menu 
 int SavingsAccount::clientMenu(int x) {
@@ -268,7 +328,7 @@ int SavingsAccount::clientMenu(int x) {
         }
     }
     while (x != 0) {
-        cout << "Select From The Following Options:\n[1] Deposit\n[2] Withdrawal\n[3] Account Info\n[4] Interest Calculator\n[0] Exit\n";
+        cout << "Select From The Following Options:\n[1] Deposit\n[2] Withdrawal\n[3] Account Info\n[4] Interest\n[0] Exit\n";
         cin >> x;
         if (x == 1 || x == 2 || x == 3 || x == 4) {
             switch (x) {
@@ -294,6 +354,11 @@ int SavingsAccount::clientMenu(int x) {
         }
     }
 }
+//Deposits Cash
+void SavingsAccount::deposit(int x) {
+    balance = balance + x;
+    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
+}
 
 //High Interest Savings Account Functions:
 //Default Constructor
@@ -301,8 +366,23 @@ HighSavingsAccount::HighSavingsAccount() {
     intRate = 5.0;
     minBalance = 10000;
     serviceCharge = 0;
-}
+    accType = "High Interest Savings";
 
+}
+//Deposit Cash
+void HighSavingsAccount::deposit(int x) {
+    if (balance <= 10000) {
+        cout << "Minimum Balance For This Account Must Remain Over $10,000" << endl;
+        while (x < 10000 - balance)
+        {
+            cout << "Required  Minimum Deposit: $" << 10000 - balance << endl;
+            cout << "How much would you like to deposit into your account?: $";
+            cin >> x;
+        }
+    }
+    balance = balance + x;
+    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
+}
 //Manger Account Functions: 
 //Default Constructor
 ManagerAccount::ManagerAccount() {
@@ -383,6 +463,7 @@ CD::CD():bankAccount() {
     cdNum = 0;
     intRate = 10.0;
     minBalance = 0;
+    accType = "Certificate Of Deposit";
 }
 //CD Account Menu
 int CD::clientMenu(int x) {
@@ -394,7 +475,7 @@ int CD::clientMenu(int x) {
             cout << "\n";
         }
     }
-    cout << "\tCertificate Of Deposit Menu\n";
+    cout << "\tClient Menu\n";
     for (int i = 0; i < 30; i++) {
         cout << "-";
         if (i == 29)
@@ -403,19 +484,25 @@ int CD::clientMenu(int x) {
         }
     }
     while (x != 0) {
-        cout << "Select From The Following Options:\n[1] Deposit\n[2] Buy CD\n[3] Withdrawal CD\n[4] Withdrawal Cash\n[5] View CDs\n[0] Exit";
+        cout << "Select From The Following Options:\n[1] Deposit\n[2] Buy CD\n[3] Withdrawal CD\n[4] Withdrawal Cash\n[5] Account Info\n[0] Exit\n";
         cin >> x;
         if (x == 1 || x == 2 || x == 3 || x == 4 || x == 5) {
             switch (x) {
             case 1:
-                //Buy CD
+                //Deposit Cash
                 return 1;
             case 2:
-                //Withdrawl
+                //Buy CD
                 return 2;
             case 3:
-                //View CDs
+                //Withdrawal CD
                 return 3;
+            case 4:
+                //Withdrawal Cash
+                return 4;
+            case 5:
+                //Account Info
+                return 5;
             }
         }
         else if (x == 0) {
@@ -428,20 +515,37 @@ int CD::clientMenu(int x) {
 }
 //Buy A CD
 void CD::buyCD(int x) {
-    while (x == 0)
-    {
-        cout << "Would you like to purchase a Certificate of Deposit?\nPrice: $5000\nMaturity: 6 Months\nInterest Rate: 10.0%\n[1] Yes\n[2] No\n";
-        cin >> x;
         if (x == 1)
         {
+            if (balance < 5000) {
+                cout << "Error: Purchase Price of CD exceeds your balance!\nMinimum Funds Needed: $" << 5000 - balance;
+                return;
+            }
+            balance = balance - 5000;
             incrementCDNum();
-            cout << "Successfully Purchased A Certificate Of Deposit!\nCD #" << cdNum << "\nPurchase Price: $5000\nMature Value: $5500";
+            cout << "Successfully Purchased A Certificate Of Deposit!\nCD #" << cdNum << "\nPurchase Price: $5000\nMature Value: $5500\nTime Until Mature: 6 Months\n";
         }
-        else {
-            cout << "Error: Invalid Selection!\n";
-        }
-    }
     return;
+}
+//Deposit Cash 
+void CD::deposit(int x) {
+    balance = balance + x;
+    cout << "\nSuccessfully deposited $" << x << " to your account!\nBalance: $" << balance << "\n\n";
+}
+//Overriden Print Function
+void CD::print() {
+    cout << "\n";
+    cout << accName << "'s " << accType << " Account:\n";
+    for (int i = 0; i < 45; i++) {
+        cout << "*";
+    }
+    cout << "\nAccount Number: " << accNum << "\nCash Balance: $" << balance << "\nAmount Of CDs : " << cdNum << "\nValue of CDs Upon Maturity: $" << cdNum * 5500 << "\nTime Until CD's Maturity: 6 Months\n\n";
+}
+//Withdrawal CD
+void CD::cdWithdrawal(int x) {
+    balance = balance - 500 + (5000 * x);
+    cdNum = cdNum - x;
+    cout << "Balance: $" << balance << "\nAmount of CDs: " << cdNum << endl;
 }
 //Set Functions
 void CD::setMaturityMonths(int x) {
